@@ -38,3 +38,14 @@ This app can use GitHub Actions for CI. The following workflows are configured:
 ### License
 
 mit
+
+### Answers
+A2 - Multi-Site & Configuration
+
+1. what each config file is for, and what breaks if you accidentally put a secret in common_site_config.json?
+
+The site_config is stores the specific configuration of the site like db credentials, but in the common_site_config it stores the all sites configuration in the bench like shared db, redis. If the secret is been in the common_site_config it leads to the security issues and to data leakages also.
+
+2. list the 4 processes bench start launches (web, worker, scheduler,socketio) and explain what happens to background jobs if the worker process crashes.
+
+If we start the bench the profile has been initialized in that  the six process has been started, web is for to connect the HTTP request and the application to the user through the browser, second one is worker this executes the background jobs in the redis queue, third one scheduler this queue the scheduler job to the redis queue and the last one is socketio this enables the realtime process and features to notify the client. If the worker process is been crashes in the background jobs, the background jobs are been stop executing and again set to the queue after the worker got been restarted the jobs is been executing, the remainin two process are one is web this starts the frappe web server, and the watch is used to rebuild the backend code in the frontend without rebuild the bench in the developement mode only.
